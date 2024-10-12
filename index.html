@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MigraCheck - Avaliação de Enxaqueca</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Biblioteca html2pdf.js para gerar PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container" id="conteudo">
+        <!-- Adicionando a logomarca -->
+         <div class="logo-container">
+            <img src="img/migracheck_logo.jpg" alt="MigraCheck Logo" class="logo">
+         </div>
+        
+        <h1>MigraCheck</h1>
+        <button id="infoBtn" class="info-button">?</button>
+        <form id="questionario">
+            <!-- Campo para Nome do Usuário -->
+            <label for="nome">Nome do Usuário:</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+
+            <!-- Campos para Data e Hora (automáticos e somente leitura) -->
+            <label for="data">Data:</label>
+            <input type="text" id="data" name="data" readonly>
+
+            <label for="hora">Hora:</label>
+            <input type="text" id="hora" name="hora" readonly>
+
+            <!-- Perguntas do Questionário -->
+            <label>1. Qual é a sua dor de cabeça neste momento?</label>
+            <div>
+                <input type="radio" name="intensidade" value="0" required> Sem dor<br>
+                <input type="radio" name="intensidade" value="1"> Leve (1-3)<br>
+                <input type="radio" name="intensidade" value="2"> Moderada (4-6)<br>
+                <input type="radio" name="intensidade" value="3"> Intensa (7-9)<br>
+                <input type="radio" name="intensidade" value="4"> Muito intensa (10)<br>
+            </div>
+
+            <label>2. Há quanto tempo você está sentindo essa dor?</label>
+            <div>
+                <input type="radio" name="duracao" value="0" required> Menos de 30 minutos<br>
+                <input type="radio" name="duracao" value="1"> 30 minutos a 1 hora<br>
+                <input type="radio" name="duracao" value="2"> 1 a 3 horas<br>
+                <input type="radio" name="duracao" value="3"> Mais de 3 horas<br>
+            </div>
+
+            <label>3. Você está sentindo algum dos seguintes sintomas?</label>
+            <div>
+                <input type="checkbox" name="sintomas" value="1"> Náuseas<br>
+                <input type="checkbox" name="sintomas" value="1"> Vômitos<br>
+                <input type="checkbox" name="sintomas" value="1"> Sensibilidade à luz<br>
+                <input type="checkbox" name="sintomas" value="1"> Sensibilidade ao som<br>
+                <input type="checkbox" name="sintomas" value="1"> Distúrbios visuais<br>
+            </div>
+
+            <label>4. A dor de cabeça está afetando suas atividades diárias?</label>
+            <div>
+                <input type="radio" name="impacto" value="0" required> Não<br>
+                <input type="radio" name="impacto" value="1"> Levemente<br>
+                <input type="radio" name="impacto" value="2"> Moderadamente<br>
+                <input type="radio" name="impacto" value="3"> Severamente<br>
+            </div>
+
+            <label>5. Você já teve enxaqueca semelhante no passado?</label>
+            <div>
+                <input type="radio" name="historico" value="1" required> Sim<br>
+                <input type="radio" name="historico" value="0"> Não<br>
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="resultado" class="resultado"></div>
+        <!-- Botão para Salvar em PDF -->
+        <button id="downloadPdf" class="pdf-button">Salvar em PDF</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sobre Enxaqueca</h2>
+            <section>
+                <h3>O que é Enxaqueca?</h3>
+                <p>A enxaqueca é um distúrbio neurológico caracterizado por dores de cabeça recorrentes que podem variar em intensidade, desde moderadas até severas. Essas dores geralmente são pulsantes e podem ocorrer de um lado da cabeça para o outro.</p>
+            </section>
+            <section>
+                <h3>Tipos de Enxaqueca</h3>
+                <ul>
+                    <li><strong>Enxaqueca sem Aura:</strong> A forma mais comum, onde a dor de cabeça não é precedida por sintomas neurológicos.</li>
+                    <li><strong>Enxaqueca com Aura:</strong> Inclui sintomas neurológicos como distúrbios visuais, formigamento ou fraqueza muscular antes do início da dor.</li>
+                    <li><strong>Enxaqueca Crônica:</strong> Quando a pessoa sofre de enxaquecas por 15 ou mais dias por mês.</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Causas e Fatores de Risco</h3>
+                <p>As causas exatas da enxaqueca ainda não são totalmente compreendidas, mas acredita-se que envolvam uma combinação de fatores genéticos e ambientais. Alguns gatilhos comuns incluem:</p>
+                <ul>
+                    <li>Estresse</li>
+                    <li>Alterações hormonais</li>
+                    <li>Certos alimentos e bebidas (como chocolate, álcool, cafeína)</li>
+                    <li>Fatores ambientais (como luzes brilhantes, ruídos altos)</li>
+                    <li>Alterações no sono</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Sintomas</h3>
+                <p>Além da dor de cabeça intensa, outros sintomas associados à enxaqueca podem incluir:</p>
+                <ul>
+                    <li>Náuseas e vômitos</li>
+                    <li>Sensibilidade à luz (fotofobia) e ao som (fonofobia)</li>
+                    <li>Distúrbios visuais, como ver luzes piscando ou pontos cegos</li>
+                    <li>Dor em outros lugares do corpo, como pescoço</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Diagnóstico</h3>
+                <p>O diagnóstico da enxaqueca é geralmente baseado nos sintomas relatados e no histórico médico do paciente. Em alguns casos, exames de imagem como a ressonância magnética podem ser realizados para descartar outras causas de dor de cabeça.</p>
+            </section>
+            <section>
+                <h3>Tratamento</h3>
+                <p>O tratamento da enxaqueca pode incluir:</p>
+                <ul>
+                    <li><strong>Medicamentos:</strong> Analgésicos, triptanos, anti-inflamatórios não esteroides (AINEs) e medicamentos preventivos.</li>
+                    <li><strong>Alterações no Estilo de Vida:</strong> Gerenciamento do estresse, manutenção de uma rotina regular de sono e alimentação saudável.</li>
+                    <li><strong>Terapias Complementares:</strong> Acupuntura, biofeedback e técnicas de relaxamento.</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Prevenção</h3>
+                <p>Para prevenir as enxaquecas, é importante identificar e evitar os gatilhos pessoais. Além disso, manter um estilo de vida saudável pode reduzir a frequência e a intensidade das crises.</p>
+            </section>
+            <section>
+                <h3>Impacto na Vida Diária</h3>
+                <p>A enxaqueca pode ter um impacto significativo na qualidade de vida, afetando a capacidade de trabalhar, estudar e realizar atividades cotidianas. O manejo adequado é essencial para minimizar esse impacto.</p>
+            </section>
+            <section>
+                <h3>Quando Procurar um Médico</h3>
+                <p>É importante consultar um profissional de saúde se você experimentar dores de cabeça frequentes, intensas ou se as dores de cabeça mudarem de padrão. Um médico pode ajudar a determinar o melhor plano de tratamento para você.</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
